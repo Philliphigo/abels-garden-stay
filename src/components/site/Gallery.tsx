@@ -14,7 +14,7 @@ const SPANS = [
   "sm:row-span-2",
   "",
   "",
-  "sm:col-span-2",
+  "",
 ];
 
 export function Gallery() {
@@ -53,7 +53,7 @@ export function Gallery() {
         </Reveal>
 
         <Reveal>
-          <div className="grid auto-rows-[160px] grid-cols-2 gap-3 sm:auto-rows-[200px] sm:grid-cols-4 sm:gap-4">
+          <div className="grid grid-flow-dense auto-rows-[160px] grid-cols-2 gap-3 sm:auto-rows-[200px] sm:grid-cols-4 sm:gap-4">
             {GALLERY.map((img, i) => (
               <button
                 key={img.src}
