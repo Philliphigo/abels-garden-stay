@@ -17,7 +17,7 @@ function TikTokIcon({ className }: { className?: string }) {
 export function Footer() {
   return (
     <footer className="relative isolate overflow-hidden bg-evening text-evening-foreground">
-      <Glow className="left-1/2 top-0 h-[34rem] w-[min(60rem,140vw)] -translate-x-1/2 bg-primary/55" />
+      <Glow className="left-1/2 top-0 h-[34rem] w-[min(60rem,140vw)] -translate-x-1/2 bg-primary/70" />
       <Glow className="right-0 top-10 h-[20rem] w-[20rem] bg-gold/35" />
       <div className="mx-auto max-w-7xl px-5 pt-16 lg:px-8 lg:pt-20">
         <Reveal>

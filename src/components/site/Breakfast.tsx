@@ -21,8 +21,8 @@ export function Breakfast() {
       id="breakfast"
       className="relative isolate overflow-hidden bg-evening py-20 text-evening-foreground lg:py-28"
     >
-      <Glow className="-left-48 top-10 h-[26rem] w-[26rem] bg-gold/45" />
-      <Glow className="-bottom-32 -right-40 h-[30rem] w-[30rem] bg-primary/55" />
+      <Glow className="-left-48 top-10 h-[28rem] w-[28rem] bg-gold/60" />
+      <Glow className="-bottom-32 -right-40 h-[32rem] w-[32rem] bg-primary/75" />
       <TentPattern fade="top" className="text-evening-foreground/[0.04]" />
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <div className="grid gap-14 lg:grid-cols-[1fr_1.2fr] lg:items-center">
