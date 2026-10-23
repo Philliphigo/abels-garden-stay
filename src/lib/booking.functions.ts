@@ -1,8 +1,8 @@
 import { createServerFn } from "@tanstack/react-start";
 import { createClient } from "@supabase/supabase-js";
-import { z } from "zod";
 
 import type { Database } from "@/integrations/supabase/types";
+import { bookingSchema } from "./booking-schema";
 import { countNights, estimateTotal, stayHitsBookedNight } from "./pricing";
 
 function publicClient() {

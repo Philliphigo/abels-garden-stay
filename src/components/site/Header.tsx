@@ -67,7 +67,7 @@ export function Header() {
                 <Menu className="h-5 w-5" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-[85vw] max-w-sm border-l-border bg-background p-0">
+            <SheetContent side="right" className="w-[85vw] max-w-sm border-l-border bg-background p-0 [&>button:last-child]:hidden">
               <SheetTitle className="sr-only">Menu</SheetTitle>
               <div className="flex items-center justify-between border-b border-border px-5 py-4">
                 <Logo />
