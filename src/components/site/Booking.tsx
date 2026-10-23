@@ -294,9 +294,9 @@ export function Booking() {
 
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-1.5">
-                      <Label htmlFor="guests">Guests</Label>
+                      <Label htmlFor="bk-guests">Guests</Label>
                       <select
-                        id="guests"
+                        id="bk-guests"
                         className={selectClass}
                         value={form.guests}
                         onChange={(e) => setForm({ ...form, guests: Number(e.target.value) })}
@@ -309,9 +309,9 @@ export function Booking() {
                       </select>
                     </div>
                     <div className="space-y-1.5">
-                      <Label htmlFor="rooms">Rooms</Label>
+                      <Label htmlFor="bk-rooms">Rooms</Label>
                       <select
-                        id="rooms"
+                        id="bk-rooms"
                         className={selectClass}
                         value={form.rooms}
                         onChange={(e) => setForm({ ...form, rooms: Number(e.target.value) })}
