@@ -81,7 +81,7 @@ export function Gallery() {
       </div>
 
       <Dialog open={open} onOpenChange={(o) => !o && setIndex(null)}>
-        <DialogContent className="h-[100dvh] w-screen max-w-none border-none bg-evening/95 p-0 text-evening-foreground sm:rounded-none [&>button]:hidden">
+        <DialogContent className="h-[100dvh] w-screen max-w-none border-none bg-evening p-0 text-evening-foreground sm:rounded-none [&>button]:hidden">
           <DialogTitle className="sr-only">Photo viewer</DialogTitle>
           {current && (
             <div className="relative flex h-full w-full flex-col">

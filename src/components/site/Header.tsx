@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Menu, Phone, X } from "lucide-react";
+import { Menu, Phone } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
@@ -67,17 +67,10 @@ export function Header() {
                 <Menu className="h-5 w-5" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-[85vw] max-w-sm border-l-border bg-background p-0 [&>button:last-child]:hidden">
+            <SheetContent side="right" className="w-[85vw] max-w-sm border-l-border bg-background p-0">
               <SheetTitle className="sr-only">Menu</SheetTitle>
-              <div className="flex items-center justify-between border-b border-border px-5 py-4">
+              <div className="border-b border-border px-5 py-4 pr-14">
                 <Logo />
-                <button
-                  onClick={() => setOpen(false)}
-                  aria-label="Close menu"
-                  className="grid h-9 w-9 place-items-center rounded-full hover:bg-secondary"
-                >
-                  <X className="h-5 w-5" />
-                </button>
               </div>
               <nav className="flex flex-col px-5 py-4" aria-label="Mobile">
                 {NAV_LINKS.map((l) => (
