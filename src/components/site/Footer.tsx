@@ -3,6 +3,7 @@ import { CalendarDays, MapPin, MessageCircle, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LODGE, NAV_LINKS, TEL_LINK, whatsappLink } from "@/lib/lodge";
 import { Logo } from "./Logo";
+import { Glow, TentPattern } from "./Backdrop";
 import { Reveal } from "./Reveal";
 
 function TikTokIcon({ className }: { className?: string }) {
@@ -15,10 +16,14 @@ function TikTokIcon({ className }: { className?: string }) {
 
 export function Footer() {
   return (
-    <footer className="bg-evening text-evening-foreground">
+    <footer className="relative isolate overflow-hidden bg-evening text-evening-foreground">
+      <Glow className="left-1/2 top-0 h-[34rem] w-[min(60rem,140vw)] -translate-x-1/2 bg-primary/55" />
+      <Glow className="right-0 top-10 h-[20rem] w-[20rem] bg-gold/35" />
       <div className="mx-auto max-w-7xl px-5 pt-16 lg:px-8 lg:pt-20">
         <Reveal>
-          <div className="bg-warm relative overflow-hidden rounded-[2rem] px-6 py-12 text-center text-primary-foreground sm:px-12 sm:py-16">
+          <div className="bg-warm relative isolate overflow-hidden rounded-[2rem] px-6 py-12 text-center text-primary-foreground shadow-card sm:px-12 sm:py-16">
+            <TentPattern fade="edges" className="text-primary-foreground/10" />
+            <Glow className="-right-20 -top-20 h-64 w-64 bg-gold/50 blur-[80px]" />
             <p className="text-xs font-semibold uppercase tracking-[0.25em] text-gold-soft">
               {LODGE.tagline}
             </p>

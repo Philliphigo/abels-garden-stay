@@ -3,11 +3,14 @@ import { MapPin, MessageCircle, Navigation, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { DIRECTIONS_URL, LODGE, MAP_EMBED_URL, TEL_LINK, whatsappLink } from "@/lib/lodge";
 import { GoogleRating } from "./Hero";
+import { Glow, TentPattern } from "./Backdrop";
 import { Eyebrow, Reveal } from "./Reveal";
 
 export function Location() {
   return (
-    <section id="location" className="py-20 lg:py-28">
+    <section id="location" className="relative isolate overflow-hidden py-20 lg:py-28">
+      <TentPattern fade="top" className="text-primary/10" />
+      <Glow className="-left-40 top-1/4 h-[26rem] w-[26rem] bg-gold/25" />
       <div className="mx-auto grid max-w-7xl gap-10 px-5 lg:grid-cols-[1fr_1.3fr] lg:items-center lg:px-8">
         <Reveal>
           <Eyebrow>Find us</Eyebrow>

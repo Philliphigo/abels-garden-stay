@@ -2,6 +2,7 @@ import { Check, MessageCircle } from "lucide-react";
 
 import { IMAGES } from "@/lib/images";
 import { TEL_LINK, whatsappLink } from "@/lib/lodge";
+import { Glow, TentPattern } from "./Backdrop";
 import { Eyebrow, Reveal } from "./Reveal";
 
 const PLATE = [
@@ -16,7 +17,13 @@ const PLATE = [
 
 export function Breakfast() {
   return (
-    <section id="breakfast" className="bg-evening py-20 text-evening-foreground lg:py-28">
+    <section
+      id="breakfast"
+      className="relative isolate overflow-hidden bg-evening py-20 text-evening-foreground lg:py-28"
+    >
+      <Glow className="-left-48 top-10 h-[26rem] w-[26rem] bg-gold/45" />
+      <Glow className="-bottom-32 -right-40 h-[30rem] w-[30rem] bg-primary/55" />
+      <TentPattern fade="top" className="text-evening-foreground/[0.04]" />
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <div className="grid gap-14 lg:grid-cols-[1fr_1.2fr] lg:items-center">
           <Reveal>

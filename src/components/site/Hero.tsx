@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { IMAGES } from "@/lib/images";
 import { LODGE, TEL_LINK } from "@/lib/lodge";
 import { PRICE_PER_ROOM_PER_NIGHT, formatKwacha } from "@/lib/pricing";
+import { Glow, TentPattern } from "./Backdrop";
 import { Reveal } from "./Reveal";
 
 export function GoogleRating({ dark = false }: { dark?: boolean }) {
@@ -30,10 +31,13 @@ export function GoogleRating({ dark = false }: { dark?: boolean }) {
 
 export function Hero() {
   return (
-    <section id="top" className="relative overflow-hidden">
+    <section id="top" className="relative isolate overflow-hidden">
+      <TentPattern className="text-primary/12" />
+      <Glow className="-right-32 top-10 h-[30rem] w-[30rem] bg-gold/45" />
+      <Glow className="-right-10 top-64 h-[22rem] w-[22rem] bg-primary/30" />
       <div
         aria-hidden
-        className="pointer-events-none absolute -right-40 -top-40 h-[34rem] w-[34rem] rounded-full bg-sand opacity-80 blur-3xl"
+        className="pointer-events-none absolute -left-40 bottom-0 h-[26rem] w-[26rem] rounded-full bg-sand opacity-80 blur-3xl"
       />
       <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-5 pb-20 pt-8 lg:grid-cols-[1.05fr_1fr] lg:px-8 lg:pb-28 lg:pt-14">
         <Reveal>

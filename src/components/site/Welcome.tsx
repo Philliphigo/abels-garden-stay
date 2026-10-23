@@ -1,5 +1,6 @@
 import { Coffee, EyeOff, ShieldCheck, Trees } from "lucide-react";
 
+import { Glow } from "./Backdrop";
 import { Eyebrow, Reveal } from "./Reveal";
 
 const HIGHLIGHTS = [
@@ -27,7 +28,9 @@ const HIGHLIGHTS = [
 
 export function Welcome() {
   return (
-    <section className="bg-sand/60 py-20 lg:py-28">
+    <section className="relative isolate overflow-hidden bg-sand/60 py-20 lg:py-28">
+      <Glow className="-left-40 -top-24 h-[24rem] w-[24rem] bg-gold/30" />
+      <Glow className="-bottom-40 -right-32 h-[26rem] w-[26rem] bg-primary/20" />
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <Reveal className="mx-auto max-w-2xl text-center">
           <Eyebrow className="justify-center">Welcome to Abel&apos;s Lodge</Eyebrow>

@@ -3,6 +3,7 @@ import { BedDouble, Car, Coffee, Fan, Shield, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { IMAGES } from "@/lib/images";
 import { PRICE_PER_ROOM_PER_NIGHT, formatKwacha } from "@/lib/pricing";
+import { Glow, TentPattern } from "./Backdrop";
 import { Eyebrow, Reveal } from "./Reveal";
 
 const FEATURES = [
@@ -16,7 +17,9 @@ const FEATURES = [
 
 export function Rooms() {
   return (
-    <section id="rooms" className="py-20 lg:py-28">
+    <section id="rooms" className="relative isolate overflow-hidden py-20 lg:py-28">
+      <TentPattern fade="edges" className="text-primary/10" />
+      <Glow className="-right-40 top-1/3 h-[28rem] w-[28rem] bg-gold/25" />
       <div className="mx-auto grid max-w-7xl items-center gap-14 px-5 lg:grid-cols-2 lg:px-8">
         <Reveal className="relative">
           <div className="overflow-hidden rounded-[2rem] shadow-card">
