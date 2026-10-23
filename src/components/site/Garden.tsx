@@ -1,6 +1,7 @@
 import { Flower2, Lamp, Leaf, Lock, Sun, Umbrella } from "lucide-react";
 
 import { IMAGES } from "@/lib/images";
+import { Glow, TentPattern } from "./Backdrop";
 import { Eyebrow, Reveal } from "./Reveal";
 
 const FEATURES = [
@@ -16,7 +17,13 @@ const PHOTOS = [IMAGES.gardenMain, IMAGES.gardenPath, IMAGES.gate];
 
 export function Garden() {
   return (
-    <section id="garden" className="bg-forest py-20 text-forest-foreground lg:py-28">
+    <section
+      id="garden"
+      className="relative isolate overflow-hidden bg-forest py-20 text-forest-foreground lg:py-28"
+    >
+      <TentPattern fade="none" className="text-forest-deep/70" />
+      <Glow className="-right-40 -top-32 h-[26rem] w-[26rem] bg-gold/15" />
+      <Glow className="-bottom-40 -left-32 h-[26rem] w-[26rem] bg-forest-deep" />
       <div className="mx-auto grid max-w-7xl gap-14 px-5 lg:grid-cols-2 lg:items-center lg:px-8">
         <Reveal>
           <Eyebrow className="text-gold">The garden</Eyebrow>

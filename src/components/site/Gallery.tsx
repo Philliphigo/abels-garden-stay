@@ -4,6 +4,7 @@ import { ChevronLeft, ChevronRight, Expand, X } from "lucide-react";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { GALLERY } from "@/lib/images";
 import { cn } from "@/lib/utils";
+import { Glow, TentPattern } from "./Backdrop";
 import { Eyebrow, Reveal } from "./Reveal";
 
 const SPANS = [
@@ -40,7 +41,9 @@ export function Gallery() {
   const current = index !== null ? GALLERY[index] : null;
 
   return (
-    <section id="gallery" className="py-20 lg:py-28">
+    <section id="gallery" className="relative isolate overflow-hidden py-20 lg:py-28">
+      <TentPattern className="text-primary/10" />
+      <Glow className="-left-40 -top-20 h-[26rem] w-[26rem] bg-primary/15" />
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <Reveal className="mb-12 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>

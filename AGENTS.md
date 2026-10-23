@@ -14,3 +14,4 @@
 - Business facts (phone, address, links) live in `src/lib/lodge.ts` and price rules in `src/lib/pricing.ts` (covered by `pricing.test.ts`); never hardcode them in components.
 - Booking requests are written server-side only via `submitBookingRequest` (service role, no anon policies on `booking_requests`); the owner marks fully booked nights by adding rows to `booked_nights` (public read-only).
 - Photos are Lovable CDN assets referenced through `src/lib/images.ts`.
+- Decorative section backgrounds (tent pattern, colour glows) come from `src/components/site/Backdrop.tsx` inside `relative isolate overflow-hidden` sections: keeps the look consistent and token-based.

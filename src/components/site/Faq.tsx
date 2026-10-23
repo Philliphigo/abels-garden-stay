@@ -6,6 +6,7 @@ import {
 } from "@/components/ui/accordion";
 import { LODGE } from "@/lib/lodge";
 import { PRICE_PER_ROOM_PER_NIGHT, formatKwacha } from "@/lib/pricing";
+import { Glow, TentPattern } from "./Backdrop";
 import { Eyebrow, Reveal } from "./Reveal";
 
 const QUESTIONS = [
@@ -33,7 +34,9 @@ const QUESTIONS = [
 
 export function Faq() {
   return (
-    <section id="faq" className="bg-sand/60 py-20 lg:py-28">
+    <section id="faq" className="relative isolate overflow-hidden bg-sand/60 py-20 lg:py-28">
+      <TentPattern fade="edges" className="text-primary/10" />
+      <Glow className="-right-32 -top-20 h-[22rem] w-[22rem] bg-primary/15" />
       <div className="mx-auto max-w-3xl px-5 lg:px-8">
         <Reveal className="mb-10 text-center">
           <Eyebrow className="justify-center">Questions</Eyebrow>

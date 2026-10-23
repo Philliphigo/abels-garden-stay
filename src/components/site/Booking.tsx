@@ -22,6 +22,7 @@ import {
 } from "@/lib/pricing";
 import { bookedNightsQuery } from "@/lib/queries";
 import { AvailabilityCalendar } from "./AvailabilityCalendar";
+import { Glow, TentPattern } from "./Backdrop";
 import { Eyebrow, Reveal } from "./Reveal";
 
 function prettyDate(d: string | null) {
@@ -124,7 +125,10 @@ export function Booking() {
       : "Hello Abel's Lodge, I would like to book a room.";
 
   return (
-    <section id="booking" className="bg-sand/60 py-20 lg:py-28">
+    <section id="booking" className="relative isolate overflow-hidden bg-sand/60 py-20 lg:py-28">
+      <TentPattern fade="bottom" className="text-primary/10" />
+      <Glow className="-right-40 top-0 h-[28rem] w-[28rem] bg-gold/35" />
+      <Glow className="-bottom-32 -left-40 h-[26rem] w-[26rem] bg-primary/20" />
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <Reveal className="mx-auto mb-12 max-w-2xl text-center">
           <Eyebrow className="justify-center">Book your stay</Eyebrow>
