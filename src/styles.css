@@ -178,6 +178,26 @@
   border-radius: 999px 999px 1.5rem 1.5rem;
 }
 
+/* Tent motif pattern — colour comes from the text colour (e.g. text-primary/15) */
+@utility pattern-tents {
+  background-color: currentColor;
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='32' viewBox='0 0 36 32'%3E%3Cpath fill-rule='evenodd' d='M9 3 L15.5 14 H2.5 Z M7.6 14 L9 10.6 L10.4 14 Z M27 19 L33.5 30 H20.5 Z M25.6 30 L27 26.6 L28.4 30 Z' fill='black'/%3E%3C/svg%3E");
+  mask-size: 36px 32px;
+  mask-repeat: repeat;
+}
+
+@utility mask-fade-b {
+  mask-image: linear-gradient(to bottom, black 0%, black 35%, transparent 95%);
+}
+
+@utility mask-fade-t {
+  mask-image: linear-gradient(to top, black 0%, black 35%, transparent 95%);
+}
+
+@utility mask-fade-x {
+  mask-image: linear-gradient(to right, black 0%, transparent 30%, transparent 70%, black 100%);
+}
+
 /* Gentle fade-in on scroll */
 .reveal {
   opacity: 0;
