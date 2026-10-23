@@ -11,6 +11,7 @@ import {
 } from "date-fns";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
+import { parseLocalDate } from "@/lib/pricing";
 import { cn } from "@/lib/utils";
 
 const WEEKDAYS = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
@@ -94,10 +95,7 @@ function MonthGrid({
 }
 
 export function AvailabilityCalendar(props: Props) {
-  const todayDate = useMemo(() => {
-    const [y, m, d] = props.today.split("-").map(Number);
-    return new Date(y, m - 1, d);
-  }, [props.today]);
+  const todayDate = useMemo(() => parseLocalDate(props.today), [props.today]);
   const [offset, setOffset] = useState(0);
   const first = addMonths(startOfMonth(todayDate), offset);
   const second = addMonths(first, 1);

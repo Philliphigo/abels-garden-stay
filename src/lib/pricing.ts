@@ -5,7 +5,7 @@ const DAY_MS = 24 * 60 * 60 * 1000;
 
 /** Parse a yyyy-MM-dd string as a UTC midnight timestamp. */
 function toUtc(date: string): number {
-  const [y, m, d] = date.split("-").map(Number);
+  const [y = 1970, m = 1, d = 1] = date.split("-").map(Number);
   return Date.UTC(y, m - 1, d);
 }
 
@@ -45,4 +45,10 @@ export function estimateTotal(nights: number, rooms: number): number {
 
 export function formatKwacha(amount: number): string {
   return `K${amount.toLocaleString("en-US")}`;
+}
+
+/** Parse a yyyy-MM-dd string as a local-time Date (for display). */
+export function parseLocalDate(date: string): Date {
+  const [y = 1970, m = 1, d = 1] = date.split("-").map(Number);
+  return new Date(y, m - 1, d);
 }

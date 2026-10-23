@@ -17,6 +17,7 @@ import {
   countNights,
   estimateTotal,
   formatKwacha,
+  parseLocalDate,
   stayHitsBookedNight,
 } from "@/lib/pricing";
 import { bookedNightsQuery } from "@/lib/queries";
@@ -25,12 +26,13 @@ import { Eyebrow, Reveal } from "./Reveal";
 
 function prettyDate(d: string | null) {
   if (!d) return "Select a date";
-  const [y, m, day] = d.split("-").map(Number);
-  return format(new Date(y, m - 1, day), "EEE d MMM yyyy");
+  return format(parseLocalDate(d), "EEE d MMM yyyy");
 }
 
 const selectClass =
   "h-11 w-full rounded-xl border border-input bg-card px-3 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring";
+
+type ErrorKey = "fullName" | "phone" | "email" | "message" | "checkIn" | "checkOut" | "guests" | "rooms" | "dates";
 
 type Done = { nights: number; total: number; name: string; checkIn: string; checkOut: string; rooms: number; guests: number };
 
@@ -52,7 +54,7 @@ export function Booking() {
     rooms: 1,
     message: "",
   });
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errors, setErrors] = useState<Partial<Record<ErrorKey, string>>>({});
   const [sending, setSending] = useState(false);
   const [done, setDone] = useState<Done | null>(null);
 
@@ -82,9 +84,9 @@ export function Booking() {
     };
     const parsed = bookingSchema.safeParse(payload);
     if (!parsed.success) {
-      const errs: Record<string, string> = {};
+      const errs: Partial<Record<ErrorKey, string>> = {};
       for (const issue of parsed.error.issues) {
-        const k = String(issue.path[0]);
+        const k = String(issue.path[0]) as ErrorKey;
         if (!errs[k]) errs[k] = issue.message;
       }
       if (!checkIn || !checkOut) errs.dates = "Please choose your check-in and check-out dates.";

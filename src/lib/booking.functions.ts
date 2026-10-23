@@ -38,37 +38,6 @@ export const getBookedNights = createServerFn({ method: "GET" }).handler(async (
   return { nights: (data ?? []).map((r) => r.night), error: null as string | null };
 });
 
-const dateStr = z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Invalid date");
-
-export const bookingSchema = z
-  .object({
-    fullName: z.string().trim().min(2, "Please enter your name").max(100),
-    phone: z
-      .string()
-      .trim()
-      .min(7, "Please enter a valid phone number")
-      .max(20)
-      .regex(/^[+\d\s()-]+$/, "Please enter a valid phone number"),
-    email: z
-      .string()
-      .trim()
-      .max(255)
-      .email("Please enter a valid email")
-      .optional()
-      .or(z.literal("")),
-    guests: z.number().int().min(1).max(12),
-    rooms: z.number().int().min(1).max(6),
-    checkIn: dateStr,
-    checkOut: dateStr,
-    message: z.string().trim().max(1000).optional().or(z.literal("")),
-  })
-  .refine((d) => d.checkOut > d.checkIn, {
-    message: "Check-out must be after check-in",
-    path: ["checkOut"],
-  });
-
-export type BookingInput = z.infer<typeof bookingSchema>;
-
 export const submitBookingRequest = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => bookingSchema.parse(input))
   .handler(async ({ data }) => {
