@@ -5,20 +5,15 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Design system definition.
- *
- * The @theme inline block maps CSS custom properties to Tailwind utility
- * classes (e.g. --color-primary -> bg-primary, text-primary).
- *
- * The :root and .dark blocks define the actual color values using oklch.
- * All colors MUST use oklch format.
- *
- * To add a new semantic color:
- * 1. Add the variable to :root (light value) and .dark (dark value)
- * 2. Register it in @theme inline as --color-<name>: var(--<name>)
+ * Abel's Lodge design system — earthy and welcoming.
+ * Ivory & sand grounds, terracotta lead colour, forest green and a dark
+ * evening tone for contrast, gold accents. All colours are oklch.
  */
 
 @theme inline {
+  --font-serif: "Fraunces", ui-serif, Georgia, serif;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -46,6 +41,23 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
   --color-ring-offset-background: var(--background);
+
+  --color-ivory: var(--ivory);
+  --color-sand: var(--sand);
+  --color-sand-deep: var(--sand-deep);
+  --color-terracotta: var(--terracotta);
+  --color-terracotta-deep: var(--terracotta-deep);
+  --color-forest: var(--forest);
+  --color-forest-deep: var(--forest-deep);
+  --color-forest-foreground: var(--forest-foreground);
+  --color-evening: var(--evening);
+  --color-evening-soft: var(--evening-soft);
+  --color-evening-foreground: var(--evening-foreground);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-whatsapp: var(--whatsapp);
+  --color-whatsapp-foreground: var(--whatsapp-foreground);
+
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
@@ -62,74 +74,62 @@
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.129 0.042 264.695);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
-  --primary-foreground: oklch(0.984 0.003 247.858);
-  --secondary: oklch(0.968 0.007 247.896);
-  --secondary-foreground: oklch(0.208 0.042 265.755);
-  --muted: oklch(0.968 0.007 247.896);
-  --muted-foreground: oklch(0.554 0.046 257.417);
-  --accent: oklch(0.968 0.007 247.896);
-  --accent-foreground: oklch(0.208 0.042 265.755);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.929 0.013 255.508);
-  --input: oklch(0.929 0.013 255.508);
-  --ring: oklch(0.704 0.04 256.788);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.984 0.003 247.858);
-  --sidebar-foreground: oklch(0.129 0.042 264.695);
-  --sidebar-primary: oklch(0.208 0.042 265.755);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.968 0.007 247.896);
-  --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
-  --sidebar-border: oklch(0.929 0.013 255.508);
-  --sidebar-ring: oklch(0.704 0.04 256.788);
-}
+  --radius: 0.875rem;
 
-.dark {
-  --background: oklch(0.129 0.042 264.695);
-  --foreground: oklch(0.984 0.003 247.858);
-  --card: oklch(0.208 0.042 265.755);
-  --card-foreground: oklch(0.984 0.003 247.858);
-  --popover: oklch(0.208 0.042 265.755);
-  --popover-foreground: oklch(0.984 0.003 247.858);
-  --primary: oklch(0.929 0.013 255.508);
-  --primary-foreground: oklch(0.208 0.042 265.755);
-  --secondary: oklch(0.279 0.041 260.031);
-  --secondary-foreground: oklch(0.984 0.003 247.858);
-  --muted: oklch(0.279 0.041 260.031);
-  --muted-foreground: oklch(0.704 0.04 256.788);
-  --accent: oklch(0.279 0.041 260.031);
-  --accent-foreground: oklch(0.984 0.003 247.858);
-  --destructive: oklch(0.704 0.191 22.216);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.551 0.027 264.364);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.208 0.042 265.755);
-  --sidebar-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.279 0.041 260.031);
-  --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.551 0.027 264.364);
+  --ivory: oklch(0.978 0.014 85);
+  --sand: oklch(0.935 0.03 78);
+  --sand-deep: oklch(0.88 0.045 72);
+  --terracotta: oklch(0.6 0.145 40);
+  --terracotta-deep: oklch(0.5 0.14 35);
+  --forest: oklch(0.37 0.06 155);
+  --forest-deep: oklch(0.3 0.05 155);
+  --forest-foreground: oklch(0.96 0.02 95);
+  --evening: oklch(0.21 0.022 45);
+  --evening-soft: oklch(0.28 0.025 45);
+  --evening-foreground: oklch(0.95 0.02 80);
+  --gold: oklch(0.79 0.125 80);
+  --gold-soft: oklch(0.88 0.08 85);
+  --whatsapp: oklch(0.62 0.15 150);
+  --whatsapp-foreground: oklch(0.99 0 0);
+
+  --background: var(--ivory);
+  --foreground: oklch(0.25 0.025 45);
+  --card: oklch(0.99 0.008 85);
+  --card-foreground: oklch(0.25 0.025 45);
+  --popover: oklch(0.99 0.008 85);
+  --popover-foreground: oklch(0.25 0.025 45);
+  --primary: var(--terracotta);
+  --primary-foreground: oklch(0.985 0.01 85);
+  --secondary: var(--sand);
+  --secondary-foreground: oklch(0.3 0.03 45);
+  --muted: var(--sand);
+  --muted-foreground: oklch(0.48 0.03 50);
+  --accent: var(--sand-deep);
+  --accent-foreground: oklch(0.28 0.03 45);
+  --destructive: oklch(0.55 0.2 27);
+  --destructive-foreground: oklch(0.985 0.01 85);
+  --border: oklch(0.87 0.03 75);
+  --input: oklch(0.85 0.03 75);
+  --ring: var(--terracotta);
+
+  --gradient-logo: linear-gradient(145deg, oklch(0.75 0.16 62), oklch(0.62 0.19 40) 55%, oklch(0.5 0.18 25));
+  --gradient-warm: linear-gradient(135deg, var(--terracotta), var(--terracotta-deep));
+  --shadow-soft: 0 18px 40px -22px color-mix(in oklab, var(--evening) 45%, transparent);
+  --shadow-card: 0 24px 60px -30px color-mix(in oklab, var(--terracotta-deep) 55%, transparent);
+
+  --chart-1: var(--terracotta);
+  --chart-2: var(--forest);
+  --chart-3: var(--gold);
+  --chart-4: var(--sand-deep);
+  --chart-5: var(--evening);
+  --sidebar: var(--ivory);
+  --sidebar-foreground: var(--foreground);
+  --sidebar-primary: var(--terracotta);
+  --sidebar-primary-foreground: var(--primary-foreground);
+  --sidebar-accent: var(--sand);
+  --sidebar-accent-foreground: var(--foreground);
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--ring);
 }
 
 @layer base {
@@ -137,8 +137,66 @@
     border-color: var(--color-border);
   }
 
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-serif);
+    letter-spacing: -0.01em;
+  }
+}
+
+@utility bg-logo {
+  background-image: var(--gradient-logo);
+}
+
+@utility bg-warm {
+  background-image: var(--gradient-warm);
+}
+
+@utility shadow-soft {
+  box-shadow: var(--shadow-soft);
+}
+
+@utility shadow-card {
+  box-shadow: var(--shadow-card);
+}
+
+@utility arch {
+  border-radius: 999px 999px 1.5rem 1.5rem;
+}
+
+/* Gentle fade-in on scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.9s ease,
+    transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  html {
+    scroll-behavior: auto;
   }
 }
