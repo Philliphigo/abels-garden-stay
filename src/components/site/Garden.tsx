@@ -41,7 +41,7 @@ export function Garden() {
         </Reveal>
 
         <Reveal delay={120}>
-          <div className="grid grid-cols-3 gap-3 sm:gap-4">
+          <div className="grid grid-cols-3 items-start gap-3 sm:gap-4">
             {PHOTOS.map((p, i) => (
               <div
                 key={p.src}
