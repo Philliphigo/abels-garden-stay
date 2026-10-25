@@ -1,4 +1,4 @@
-import { BedDouble, Car, Coffee, Fan, Shield, Sparkles } from "lucide-react";
+import { BedDouble, Car, Coffee, Fan, Grid2x2, Shield } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { IMAGES } from "@/lib/images";
@@ -10,7 +10,7 @@ const FEATURES = [
   { icon: BedDouble, label: "Comfortable double bed" },
   { icon: Shield, label: "Mosquito net" },
   { icon: Fan, label: "Standing fan" },
-  { icon: Sparkles, label: "Clean tiled floors" },
+  { icon: Grid2x2, label: "Clean tiled floors" },
   { icon: Coffee, label: "Breakfast included" },
   { icon: Car, label: "Parking inside the gate" },
 ];
