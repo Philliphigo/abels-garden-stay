@@ -76,7 +76,7 @@ export function Hero() {
           </div>
         </Reveal>
 
-        <Reveal immediate delay={250} className="relative mx-auto w-full max-w-md lg:max-w-none">
+        <Reveal immediate delay={120} className="relative mx-auto w-full max-w-md lg:max-w-none">
           <div className="relative ml-auto w-[78%] sm:w-[72%]">
             <div className="arch overflow-hidden border-[6px] border-card shadow-card">
               <img

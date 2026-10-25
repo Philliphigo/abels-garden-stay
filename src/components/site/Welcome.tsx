@@ -46,7 +46,7 @@ export function Welcome() {
 
         <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {HIGHLIGHTS.map((h, i) => (
-            <Reveal key={h.title} delay={i * 90}>
+            <Reveal key={h.title} delay={i * 50}>
               <div className="h-full rounded-3xl border border-border bg-card p-7 shadow-soft">
                 <span className="bg-warm grid h-12 w-12 place-items-center rounded-2xl text-primary-foreground">
                   <h.icon className="h-5 w-5" />

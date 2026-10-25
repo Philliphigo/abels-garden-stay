@@ -52,7 +52,7 @@ export function Location() {
           </div>
         </Reveal>
 
-        <Reveal stagger delay={120}>
+        <Reveal stagger>
           <div className="overflow-hidden rounded-[2rem] border-[6px] border-card shadow-card">
             <iframe
               title="Map showing Abel's Lodge in Area 25, Dzenza, Lilongwe"
