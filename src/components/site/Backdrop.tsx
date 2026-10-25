@@ -33,7 +33,7 @@ export function Glow({ className }: { className?: string }) {
   return (
     <div
       aria-hidden
-      className={cn("pointer-events-none absolute -z-10 rounded-full blur-[110px]", className)}
+      className={cn("pointer-events-none absolute -z-10 glow-mask rounded-full", className)}
     />
   );
 }
