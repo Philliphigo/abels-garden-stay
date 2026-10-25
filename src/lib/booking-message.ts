@@ -7,14 +7,14 @@ export const DEFAULT_GUEST_NOTE = "No special requests. Please confirm my bookin
 export type BookingMessageDetails = {
   fullName: string;
   phone: string;
-  email?: string;
+  email?: string | undefined;
   checkIn: string;
   checkOut: string;
   nights: number;
   rooms: number;
   guests: number;
   total: number;
-  message?: string;
+  message?: string | undefined;
 };
 
 const plural = (n: number, word: string) => `${n} ${word}${n === 1 ? "" : "s"}`;
