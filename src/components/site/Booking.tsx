@@ -246,11 +246,14 @@ export function Booking() {
                     <p className="font-serif text-3xl font-semibold">{formatKwacha(done.total)}</p>
                     <p className="text-xs text-muted-foreground">Pay at the lodge · breakfast included</p>
                   </div>
-                  <p className="mt-6 text-sm text-muted-foreground">Want a faster reply?</p>
+                  <p className="mt-6 text-sm text-muted-foreground">
+                    WhatsApp opened with your booking details ready. Just tap send. If it
+                    didn&apos;t open, use the button below.
+                  </p>
                   <div className="mt-3 grid gap-3 sm:grid-cols-2">
                     <Button asChild className="h-12 rounded-full bg-whatsapp text-whatsapp-foreground hover:bg-whatsapp/90">
                       <a href={whatsappLink(waMessage)} target="_blank" rel="noreferrer">
-                        <MessageCircle /> WhatsApp us
+                        <MessageCircle /> Send on WhatsApp
                       </a>
                     </Button>
                     <Button asChild variant="outline" className="h-12 rounded-full">
