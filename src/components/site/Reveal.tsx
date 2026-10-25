@@ -15,8 +15,8 @@ function getObserver() {
         }
       }
     },
-    // Start as soon as the top edge peeks in, a little before it is fully on screen.
-    { threshold: 0, rootMargin: "0px 0px -8% 0px" },
+    // Start just before the block scrolls onto the screen, so it is already settling as it appears.
+    { threshold: 0, rootMargin: "0px 0px 12% 0px" },
   );
   return sharedObserver;
 }

@@ -204,17 +204,22 @@
 }
 
 /*
- * Content entrance animations.
+ * Content entrance animations — quick and subtle, same timing on every screen size.
  * Only opacity and transform are animated (GPU friendly, no layout work).
+ * Content is readable almost instantly: opacity finishes faster than the slide.
  */
 :root {
-  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-soft: cubic-bezier(0.25, 1, 0.5, 1);
+  --reveal-distance: 14px;
+  --reveal-fade: 0.35s;
+  --reveal-slide: 0.55s;
+  --reveal-step: 55ms;
 }
 
 @keyframes reveal-rise {
   from {
     opacity: 0;
-    transform: translate3d(0, 28px, 0);
+    transform: translate3d(0, var(--reveal-distance), 0);
   }
   to {
     opacity: 1;
@@ -225,10 +230,10 @@
 /* On scroll: whole block */
 .reveal {
   opacity: 0;
-  transform: translate3d(0, 36px, 0);
+  transform: translate3d(0, var(--reveal-distance), 0);
   transition:
-    opacity 0.8s var(--ease-soft),
-    transform 1.1s var(--ease-soft);
+    opacity var(--reveal-fade) ease-out,
+    transform var(--reveal-slide) var(--ease-soft);
   transition-delay: var(--reveal-delay, 0ms);
 }
 .reveal.is-visible {
@@ -236,7 +241,7 @@
   transform: none;
 }
 
-/* On scroll: children one after another */
+/* On scroll: children one after another (capped so long lists never wait) */
 .reveal.reveal-stagger {
   opacity: 1;
   transform: none;
@@ -247,18 +252,15 @@
 }
 .reveal-stagger > :nth-child(2) { --i: 1; }
 .reveal-stagger > :nth-child(3) { --i: 2; }
-.reveal-stagger > :nth-child(4) { --i: 3; }
-.reveal-stagger > :nth-child(5) { --i: 4; }
-.reveal-stagger > :nth-child(6) { --i: 5; }
-.reveal-stagger > :nth-child(n + 7) { --i: 6; }
+.reveal-stagger > :nth-child(n + 4) { --i: 3; }
 
 .reveal.reveal-stagger > * {
   opacity: 0;
-  transform: translate3d(0, 24px, 0);
+  transform: translate3d(0, var(--reveal-distance), 0);
   transition:
-    opacity 0.7s var(--ease-soft),
-    transform 1s var(--ease-soft);
-  transition-delay: calc(var(--reveal-delay, 0ms) + var(--i) * 90ms);
+    opacity var(--reveal-fade) ease-out,
+    transform var(--reveal-slide) var(--ease-soft);
+  transition-delay: calc(var(--reveal-delay, 0ms) + var(--i) * var(--reveal-step));
 }
 .reveal.reveal-stagger.is-visible > * {
   opacity: 1;
@@ -267,12 +269,12 @@
 
 /* On page load (top of the page): plays straight away, no waiting for scripts */
 .reveal-now:not(.reveal-stagger) {
-  animation: reveal-rise 1s var(--ease-soft) both;
-  animation-delay: calc(var(--reveal-delay, 0ms) + 80ms);
+  animation: reveal-rise var(--reveal-slide) var(--ease-soft) both;
+  animation-delay: var(--reveal-delay, 0ms);
 }
 .reveal-now.reveal-stagger > * {
-  animation: reveal-rise 0.9s var(--ease-soft) both;
-  animation-delay: calc(var(--reveal-delay, 0ms) + 80ms + var(--i) * 110ms);
+  animation: reveal-rise var(--reveal-slide) var(--ease-soft) both;
+  animation-delay: calc(var(--reveal-delay, 0ms) + var(--i) * var(--reveal-step));
 }
 
 @media (prefers-reduced-motion: reduce) {

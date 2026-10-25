@@ -67,7 +67,7 @@ export function Breakfast() {
             </div>
           </Reveal>
 
-          <Reveal stagger delay={120}>
+          <Reveal stagger>
             <div className="grid grid-cols-2 gap-4">
               <div className="row-span-2 overflow-hidden rounded-[2rem]">
                 <img
