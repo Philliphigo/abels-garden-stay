@@ -215,7 +215,7 @@ export function Booking() {
         <Reveal>
           <div className="grid gap-6 lg:grid-cols-[1.25fr_1fr]">
             <div className="rounded-[2rem] border border-border bg-card p-5 shadow-soft sm:p-8">
-              <div className="mb-6 grid grid-cols-2 gap-3">
+              <div id="booking-dates" className="mb-6 grid grid-cols-2 gap-3">
                 <div className="rounded-2xl bg-secondary p-4">
                   <p className="text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
                     Check-in
