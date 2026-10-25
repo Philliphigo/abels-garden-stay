@@ -104,6 +104,18 @@ export function Booking() {
       }
       if (!checkIn || !checkOut) errs.dates = "Please choose your check-in and check-out dates.";
       setErrors(errs);
+      // On phones the calendar sits above the form, so a missing-dates message
+      // would be off screen: always say what's missing and take the guest to it.
+      const first = errs.dates
+        ? "dates"
+        : (["fullName", "phone", "email", "message"] as const).find((k) => errs[k]);
+      const firstMsg = errs.dates ?? (first ? errs[first] : undefined);
+      if (firstMsg) toast.error(firstMsg);
+      const target = document.getElementById(first === "dates" ? "booking-dates" : (first ?? ""));
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth", block: "center" });
+        if (first !== "dates") target.focus({ preventScroll: true });
+      }
       return;
     }
     setErrors({});
