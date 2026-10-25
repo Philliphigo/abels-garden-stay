@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState, type FormEvent } from "react";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { format } from "date-fns";
-import { CheckCircle2, Loader2, MessageCircle, Phone } from "lucide-react";
+import { Check, CheckCircle2, Copy, Loader2, MessageCircle, Phone } from "lucide-react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
@@ -45,6 +45,7 @@ type Done = {
   rooms: number;
   guests: number;
   whatsappMessage: string;
+  whatsappOpened: boolean;
 };
 
 export function Booking() {
@@ -68,6 +69,7 @@ export function Booking() {
   const [errors, setErrors] = useState<Partial<Record<ErrorKey, string>>>({});
   const [sending, setSending] = useState(false);
   const [done, setDone] = useState<Done | null>(null);
+  const [copied, setCopied] = useState(false);
 
   const nights = checkIn && checkOut ? countNights(checkIn, checkOut) : 0;
   const total = estimateTotal(nights, form.rooms);
@@ -122,11 +124,11 @@ export function Booking() {
         total: res.total,
       });
       const url = whatsappLink(message);
-      if (waWindow && !waWindow.closed) {
-        waWindow.location.href = url;
-      } else {
-        window.location.href = url;
-      }
+      // If the browser blocked the new tab, stay on the page: the thank-you
+      // screen has a WhatsApp button and a copy-the-message fallback.
+      const whatsappOpened = !!waWindow && !waWindow.closed;
+      if (whatsappOpened) waWindow.location.href = url;
+      setCopied(false);
       setDone({
         nights: res.nights,
         total: res.total,
@@ -136,12 +138,42 @@ export function Booking() {
         rooms: parsed.data.rooms,
         guests: parsed.data.guests,
         whatsappMessage: message,
+        whatsappOpened,
       });
     } catch {
       waWindow?.close();
       toast.error("Something went wrong. Please call or WhatsApp us instead.");
     } finally {
       setSending(false);
+    }
+  }
+
+  async function copyMessage(text: string) {
+    let ok = false;
+    try {
+      await navigator.clipboard.writeText(text);
+      ok = true;
+    } catch {
+      // Older phones / non-secure pages: fall back to a hidden textarea.
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "");
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        ok = document.execCommand("copy");
+      } catch {
+        ok = false;
+      }
+      ta.remove();
+    }
+    if (ok) {
+      setCopied(true);
+      toast.success("Booking message copied. Paste it into WhatsApp or SMS.");
+    } else {
+      toast.error("Couldn't copy automatically. Press and hold the message to copy it.");
     }
   }
 
@@ -247,8 +279,9 @@ export function Booking() {
                     <p className="text-xs text-muted-foreground">Pay at the lodge · breakfast included</p>
                   </div>
                   <p className="mt-6 text-sm text-muted-foreground">
-                    WhatsApp opened with your booking details ready. Just tap send. If it
-                    didn&apos;t open, use the button below.
+                    {done.whatsappOpened
+                      ? "WhatsApp opened with your booking details ready. Just tap send there."
+                      : "Tap the button below to send your booking details to us on WhatsApp."}
                   </p>
                   <div className="mt-3 grid gap-3 sm:grid-cols-2">
                     <Button asChild className="h-12 rounded-full bg-whatsapp text-whatsapp-foreground hover:bg-whatsapp/90">
@@ -260,6 +293,32 @@ export function Booking() {
                       <a href={TEL_LINK}>
                         <Phone /> Call us
                       </a>
+                    </Button>
+                  </div>
+
+                  <div className="mt-6 rounded-2xl border border-dashed border-border bg-background p-4">
+                    <p className="text-sm font-semibold">WhatsApp didn&apos;t open?</p>
+                    <p className="mt-1 text-sm text-muted-foreground">
+                      Copy your booking message and send it to{" "}
+                      <strong className="text-foreground">{LODGE.phoneDisplay}</strong> on
+                      WhatsApp or by SMS.
+                    </p>
+                    <Textarea
+                      readOnly
+                      aria-label="Your booking message"
+                      value={done.whatsappMessage}
+                      rows={7}
+                      onFocus={(e) => e.currentTarget.select()}
+                      className="mt-3 resize-none rounded-xl bg-card text-sm leading-relaxed"
+                    />
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={() => copyMessage(done.whatsappMessage)}
+                      className="mt-3 h-11 w-full rounded-full"
+                    >
+                      {copied ? <Check /> : <Copy />}
+                      {copied ? "Message copied" : "Copy booking message"}
                     </Button>
                   </div>
                   <button

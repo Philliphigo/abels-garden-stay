@@ -40,7 +40,7 @@ export function Rooms() {
           </div>
         </Reveal>
 
-        <Reveal delay={120}>
+        <Reveal stagger delay={120}>
           <Eyebrow>Our rooms</Eyebrow>
           <h2 className="text-4xl font-medium sm:text-5xl">
             Simple, spotless and <em className="text-primary">restful.</em>

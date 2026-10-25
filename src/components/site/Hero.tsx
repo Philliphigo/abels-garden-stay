@@ -37,10 +37,10 @@ export function Hero() {
       <Glow className="-right-10 top-64 h-[22rem] w-[22rem] bg-primary/30" />
       <div
         aria-hidden
-        className="pointer-events-none absolute -left-40 bottom-0 h-[26rem] w-[26rem] rounded-full bg-sand opacity-80 blur-3xl"
+        className="pointer-events-none absolute -left-40 bottom-0 h-[26rem] w-[26rem] rounded-full bg-sand opacity-90 glow-mask"
       />
       <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-5 pb-20 pt-8 lg:grid-cols-[1.05fr_1fr] lg:px-8 lg:pb-28 lg:pt-14">
-        <Reveal>
+        <Reveal immediate stagger>
           <p className="mb-5 text-xs font-semibold uppercase tracking-[0.25em] text-primary">
             Area 25 · Dzenza · Lilongwe
           </p>
@@ -76,7 +76,7 @@ export function Hero() {
           </div>
         </Reveal>
 
-        <Reveal delay={150} className="relative mx-auto w-full max-w-md lg:max-w-none">
+        <Reveal immediate delay={250} className="relative mx-auto w-full max-w-md lg:max-w-none">
           <div className="relative ml-auto w-[78%] sm:w-[72%]">
             <div className="arch overflow-hidden border-[6px] border-card shadow-card">
               <img

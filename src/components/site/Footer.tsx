@@ -23,7 +23,7 @@ export function Footer() {
         <Reveal>
           <div className="bg-warm relative isolate overflow-hidden rounded-[2rem] px-6 py-12 text-center text-primary-foreground shadow-card sm:px-12 sm:py-16">
             <TentPattern fade="edges" className="text-primary-foreground/10" />
-            <Glow className="-right-20 -top-20 h-64 w-64 bg-gold/50 blur-[80px]" />
+            <Glow className="-right-20 -top-20 h-64 w-64 bg-gold/50" />
             <p className="text-xs font-semibold uppercase tracking-[0.25em] text-gold-soft">
               {LODGE.tagline}
             </p>
