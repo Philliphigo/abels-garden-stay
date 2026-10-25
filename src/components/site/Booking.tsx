@@ -104,6 +104,18 @@ export function Booking() {
       }
       if (!checkIn || !checkOut) errs.dates = "Please choose your check-in and check-out dates.";
       setErrors(errs);
+      // On phones the calendar sits above the form, so a missing-dates message
+      // would be off screen: always say what's missing and take the guest to it.
+      const first = errs.dates
+        ? "dates"
+        : (["fullName", "phone", "email", "message"] as const).find((k) => errs[k]);
+      const firstMsg = errs.dates ?? (first ? errs[first] : undefined);
+      if (firstMsg) toast.error(firstMsg);
+      const target = document.getElementById(first === "dates" ? "booking-dates" : (first ?? ""));
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth", block: "center" });
+        if (first !== "dates") target.focus({ preventScroll: true });
+      }
       return;
     }
     setErrors({});
@@ -203,7 +215,7 @@ export function Booking() {
         <Reveal>
           <div className="grid gap-6 lg:grid-cols-[1.25fr_1fr]">
             <div className="rounded-[2rem] border border-border bg-card p-5 shadow-soft sm:p-8">
-              <div className="mb-6 grid grid-cols-2 gap-3">
+              <div id="booking-dates" className="mb-6 grid grid-cols-2 gap-3">
                 <div className="rounded-2xl bg-secondary p-4">
                   <p className="text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
                     Check-in
