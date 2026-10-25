@@ -1,43 +1,66 @@
-import { useEffect, useRef, type ReactNode } from "react";
+import { useEffect, useRef, type CSSProperties, type ReactNode } from "react";
 
 import { cn } from "@/lib/utils";
 
-/** Fades its children in gently when they scroll into view. */
+// One shared observer for every Reveal on the page (cheaper than one per element).
+let sharedObserver: IntersectionObserver | null = null;
+function getObserver() {
+  if (sharedObserver || typeof IntersectionObserver === "undefined") return sharedObserver;
+  sharedObserver = new IntersectionObserver(
+    (entries) => {
+      for (const e of entries) {
+        if (e.isIntersecting) {
+          e.target.classList.add("is-visible");
+          sharedObserver?.unobserve(e.target);
+        }
+      }
+    },
+    // Start as soon as the top edge peeks in, a little before it is fully on screen.
+    { threshold: 0, rootMargin: "0px 0px -8% 0px" },
+  );
+  return sharedObserver;
+}
+
+/**
+ * Gently rises and fades its content in.
+ * - default: when it scrolls into view
+ * - `stagger`: direct children come in one after another
+ * - `immediate`: plays on page load without waiting for scripts (use above the fold)
+ */
 export function Reveal({
   children,
   className,
   delay = 0,
+  stagger = false,
+  immediate = false,
 }: {
   children: ReactNode;
   className?: string;
   delay?: number;
+  stagger?: boolean;
+  immediate?: boolean;
 }) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (immediate) return;
     const el = ref.current;
     if (!el) return;
-    if (typeof IntersectionObserver === "undefined") {
+    const io = getObserver();
+    if (!io) {
       el.classList.add("is-visible");
       return;
     }
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries) {
-          if (e.isIntersecting) {
-            e.target.classList.add("is-visible");
-            io.unobserve(e.target);
-          }
-        }
-      },
-      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" },
-    );
     io.observe(el);
-    return () => io.disconnect();
-  }, []);
+    return () => io.unobserve(el);
+  }, [immediate]);
 
   return (
-    <div ref={ref} className={cn("reveal", className)} style={{ transitionDelay: `${delay}ms` }}>
+    <div
+      ref={ref}
+      className={cn(immediate ? "reveal-now" : "reveal", stagger && "reveal-stagger", className)}
+      style={{ "--reveal-delay": `${delay}ms` } as CSSProperties}
+    >
       {children}
     </div>
   );
