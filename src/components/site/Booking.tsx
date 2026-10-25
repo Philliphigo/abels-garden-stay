@@ -11,6 +11,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { MAX_GUESTS, MAX_ROOMS, bookingSchema } from "@/lib/booking-schema";
 import { submitBookingRequest } from "@/lib/booking.functions";
+import { bookingWhatsappMessage } from "@/lib/booking-message";
 import { LODGE, TEL_LINK, whatsappLink } from "@/lib/lodge";
 import {
   PRICE_PER_ROOM_PER_NIGHT,
@@ -35,7 +36,16 @@ const selectClass =
 
 type ErrorKey = "fullName" | "phone" | "email" | "message" | "checkIn" | "checkOut" | "guests" | "rooms" | "dates";
 
-type Done = { nights: number; total: number; name: string; checkIn: string; checkOut: string; rooms: number; guests: number };
+type Done = {
+  nights: number;
+  total: number;
+  name: string;
+  checkIn: string;
+  checkOut: string;
+  rooms: number;
+  guests: number;
+  whatsappMessage: string;
+};
 
 export function Booking() {
   const { data } = useSuspenseQuery(bookedNightsQuery);
@@ -96,11 +106,26 @@ export function Booking() {
     }
     setErrors({});
     setSending(true);
+    // Open the WhatsApp tab right away (still inside the click) so phones and
+    // browsers don't block it; it is pointed at the message once the request is saved.
+    const waWindow = window.open("", "_blank");
     try {
       const res = await submit({ data: parsed.data });
       if (!res.ok) {
+        waWindow?.close();
         toast.error(res.error);
         return;
+      }
+      const message = bookingWhatsappMessage({
+        ...parsed.data,
+        nights: res.nights,
+        total: res.total,
+      });
+      const url = whatsappLink(message);
+      if (waWindow && !waWindow.closed) {
+        waWindow.location.href = url;
+      } else {
+        window.location.href = url;
       }
       setDone({
         nights: res.nights,
@@ -110,8 +135,10 @@ export function Booking() {
         checkOut: parsed.data.checkOut,
         rooms: parsed.data.rooms,
         guests: parsed.data.guests,
+        whatsappMessage: message,
       });
     } catch {
+      waWindow?.close();
       toast.error("Something went wrong. Please call or WhatsApp us instead.");
     } finally {
       setSending(false);
@@ -119,7 +146,7 @@ export function Booking() {
   }
 
   const waMessage = done
-    ? `Hello Abel's Lodge, this is ${done.name}. I just sent a booking request for ${prettyDate(done.checkIn)} to ${prettyDate(done.checkOut)} (${done.nights} night${done.nights > 1 ? "s" : ""}, ${done.rooms} room${done.rooms > 1 ? "s" : ""}, ${done.guests} guest${done.guests > 1 ? "s" : ""}).`
+    ? done.whatsappMessage
     : checkIn && checkOut
       ? `Hello Abel's Lodge, I'd like to book from ${prettyDate(checkIn)} to ${prettyDate(checkOut)} for ${form.guests} guest${form.guests > 1 ? "s" : ""} and ${form.rooms} room${form.rooms > 1 ? "s" : ""}.`
       : "Hello Abel's Lodge, I would like to book a room.";
