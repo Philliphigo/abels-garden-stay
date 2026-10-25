@@ -69,6 +69,7 @@ export function Booking() {
   const [errors, setErrors] = useState<Partial<Record<ErrorKey, string>>>({});
   const [sending, setSending] = useState(false);
   const [done, setDone] = useState<Done | null>(null);
+  const [copied, setCopied] = useState(false);
 
   const nights = checkIn && checkOut ? countNights(checkIn, checkOut) : 0;
   const total = estimateTotal(nights, form.rooms);
