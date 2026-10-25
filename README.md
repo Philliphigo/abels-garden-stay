@@ -18,7 +18,7 @@ Location with a Google map, the address, a Get directions button, call and Whats
 Questions about price, how to book, payment, parking and location.
 Footer with a final call to action, contact details, a TikTok link (@abels.lodge) and the tagline.
 
-This project was built with [Lovable](https://lovable.dev).
+
 
 **Live app**: https://abels-garden-stay.lovable.app
 
