@@ -28,7 +28,7 @@ export function TentPattern({
   );
 }
 
-/** Soft blurred colour glow. Position and colour it with classes. */
+/** Soft colour glow. Position and colour it with classes. */
 export function Glow({ className }: { className?: string }) {
   return (
     <div
