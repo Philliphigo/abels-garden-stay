@@ -309,7 +309,7 @@ export function Booking() {
                       value={done.whatsappMessage}
                       rows={7}
                       onFocus={(e) => e.currentTarget.select()}
-                      className="mt-3 resize-none rounded-xl bg-card font-mono text-xs leading-relaxed"
+                      className="mt-3 resize-none rounded-xl bg-card text-sm leading-relaxed"
                     />
                     <Button
                       type="button"
