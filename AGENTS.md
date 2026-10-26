@@ -16,3 +16,4 @@
 - Photos are Lovable CDN assets referenced through `src/lib/images.ts`.
 - Decorative section backgrounds (tent pattern, colour glows) come from `src/components/site/Backdrop.tsx` inside `relative isolate overflow-hidden` sections: keeps the look consistent and token-based.
 - Entrance animations go through `Reveal` (shared observer; `stagger`, `immediate` for above the fold) and animate only opacity/transform; glows use `glow-mask`, never large CSS blur filters: keeps scrolling smooth on phones.
+- Never add a root `index.html`: the published build serves it instead of the app (it broke the live site once). The GitHub Pages redirect lives in `README.md` as raw HTML.
