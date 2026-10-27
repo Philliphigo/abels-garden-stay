@@ -17,3 +17,4 @@
 - Decorative section backgrounds (tent pattern, colour glows) come from `src/components/site/Backdrop.tsx` inside `relative isolate overflow-hidden` sections: keeps the look consistent and token-based.
 - Entrance animations go through `Reveal` (shared observer; `stagger`, `immediate` for above the fold) and animate only opacity/transform; glows use `glow-mask`, never large CSS blur filters: keeps scrolling smooth on phones.
 - Never add a root `index.html`: the published build serves it instead of the app (it broke the live site once). The GitHub Pages redirect lives in `README.md` as raw HTML.
+- Keep `vite.build.target` at `["es2020","safari14"]` in `vite.config.ts` (plus the polyfills in `__root.tsx`): the lodge owner uses an older iMac Safari that cannot parse ES2022 syntax like class static blocks.
