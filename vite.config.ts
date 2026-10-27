@@ -12,4 +12,9 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
+  vite: {
+    // Older Safari (pre-16.4, e.g. older iMacs) can't parse class static blocks and other
+    // ES2022 syntax, which made the page chunk fail to load. Lower browser output syntax.
+    build: { target: ["es2020", "safari14"] },
+  },
 });
