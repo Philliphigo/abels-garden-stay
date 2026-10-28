@@ -124,7 +124,20 @@ export function Booking() {
     // browsers don't block it; it is pointed at the message once the request is saved.
     const waWindow = window.open("", "_blank");
     try {
-      const res = await submit({ data: parsed.data });
+      // If saving isn't possible (no server, no database, slow network), carry on:
+      // the WhatsApp message is what actually reaches the lodge.
+      const localNights = countNights(parsed.data.checkIn, parsed.data.checkOut);
+      const fallback = { ok: true as const, nights: localNights, total: estimateTotal(localNights, parsed.data.rooms) };
+      let res: { ok: true; nights: number; total: number } | { ok: false; error: string };
+      try {
+        res = await Promise.race([
+          submit({ data: parsed.data }),
+          new Promise<typeof fallback>((resolve) => setTimeout(() => resolve(fallback), 8000)),
+        ]);
+      } catch (err) {
+        console.error("booking request could not be saved; continuing on WhatsApp", err);
+        res = fallback;
+      }
       if (!res.ok) {
         waWindow?.close();
         toast.error(res.error);
@@ -152,9 +165,6 @@ export function Booking() {
         whatsappMessage: message,
         whatsappOpened,
       });
-    } catch {
-      waWindow?.close();
-      toast.error("Something went wrong. Please call or WhatsApp us instead.");
     } finally {
       setSending(false);
     }
