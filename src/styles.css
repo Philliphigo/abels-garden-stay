@@ -132,6 +132,13 @@
   --sidebar-ring: var(--ring);
 }
 
+/* Larger screens: slightly stronger secondary text for clean readability */
+@media (min-width: 768px) {
+  :root {
+    --muted-foreground: oklch(0.4 0.03 50);
+  }
+}
+
 @layer base {
   * {
     border-color: var(--color-border);
